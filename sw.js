@@ -6,7 +6,7 @@ var filesToCache = [
   '/js/main.js'
 ];
 
-/* Start the service worker and cache all of the app's content */
+/* Memulai service worker dan memasukan filesToCache ke dalam cache */
 self.addEventListener('install', function(e) {
   e.waitUntil(
     caches.open(cacheName).then(function(cache) {
@@ -16,7 +16,7 @@ self.addEventListener('install', function(e) {
   self.skipWaiting();
 });
 
-/* Serve cached content when offline */
+/* Akan menjalankan file cache ketika dalam keadaan offline */
 self.addEventListener('fetch', function(e) {
   e.respondWith(
     caches.match(e.request).then(function(response) {
