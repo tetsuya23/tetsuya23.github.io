@@ -16,6 +16,20 @@ self.addEventListener('install', function(e) {
   self.skipWaiting();
 });
 
+// Menghapus cache
+self.addEventListener('activate', event => {
+  event.waitUntil(
+      caches.keys().then(cacheNames => {
+          return Promise.all(
+              cacheNames
+                  .filter(cacheName => (cacheName.startsWith("pwa-")))
+                  .filter(cacheName => (cacheName !== staticCacheName))
+                  .map(cacheName => caches.delete(cacheName))
+          );
+      })
+  );
+});
+
 /* Akan menjalankan file cache ketika dalam keadaan offline */
 self.addEventListener('fetch', function(e) {
   e.respondWith(
