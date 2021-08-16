@@ -16,7 +16,7 @@ self.addEventListener('install', function(e) {
   self.skipWaiting();
 });
 
-// Menghapus cache
+/* Mengupdate cache */
 self.addEventListener('activate', event => {
   event.waitUntil(
       caches.keys().then(cacheNames => {
